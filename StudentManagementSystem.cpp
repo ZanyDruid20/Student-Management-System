@@ -1,5 +1,7 @@
 #include <iostream>
 #include <string>
+#include <chrono>
+
 using namespace std;
 
 struct TreeNode {
@@ -260,44 +262,59 @@ private:
 int main() {
     StudentInformationSystem system;
 
+    auto start = chrono::high_resolution_clock::now();
+
     // Adding students
     system.addStudent("Alice", 101, "CS", 3.8);
     system.addStudent("Bob", 102, "Math", 3.5);
     system.addStudent("Sam", 123, "Biology", 3.7);
     system.addStudent("Jacob", 455, "Physics", 3.8);
     system.addStudent("Kwame", 200, "CS", 3.4);
-    // Add 25 more students for a total of 30
-    system.addStudent("Emily", 103, "Engineering", 3.6);
-    system.addStudent("Sophia", 104, "CS", 3.9);
-    system.addStudent("Michael", 105, "Math", 3.2);
-    system.addStudent("Olivia", 106, "Biology", 3.4);
-    system.addStudent("James", 107, "Physics", 3.7);
-    system.addStudent("Isabella", 108, "Engineering", 3.5);
-    system.addStudent("William", 109, "CS", 3.3);
-    system.addStudent("Amelia", 110, "Math", 3.8);
-    system.addStudent("Benjamin", 111, "Biology", 3.6);
-    system.addStudent("Elijah", 112, "Physics", 3.9);
-    system.addStudent("Charlotte", 113, "Engineering", 3.2);
-    system.addStudent("Henry", 114, "CS", 3.7);
-    system.addStudent("Ava", 115, "Math", 3.4);
-    system.addStudent("Mason", 116, "Biology", 3.5);
-    system.addStudent("Evelyn", 117, "Physics", 3.8);
-    system.addStudent("Liam", 118, "Engineering", 3.6);
-    system.addStudent("Harper", 119, "CS", 3.3);
-    system.addStudent("Alexander", 120, "Math", 3.9);
-    system.addStudent("Mia", 121, "Biology", 3.7);
-    system.addStudent("Sebastian", 122, "Physics", 3.2);
+    system.addStudent("Emily", 301, "Chemistry", 3.6);
+    system.addStudent("David", 302, "History", 3.2);
+    system.addStudent("Sophia", 303, "CS", 3.9);
+    system.addStudent("Liam", 304, "Math", 3.1);
+    system.addStudent("Olivia", 305, "Biology", 3.3);
+    system.addStudent("Noah", 306, "Physics", 3.7);
+    system.addStudent("Emma", 307, "CS", 3.6);
+    system.addStudent("Ava", 308, "Math", 3.8);
+    system.addStudent("Isabella", 309, "Biology", 3.9);
+    system.addStudent("Ethan", 310, "Physics", 3.5);
 
+    auto end = chrono::high_resolution_clock::now();
+    auto duration = chrono::duration_cast<chrono::microseconds>(end - start);
+    cout << "Time taken to add students: " << duration.count() << " microseconds" << endl;
+
+    cout << "All Students:" << endl;
+    system.displayAllStudents();
+
+    start = chrono::high_resolution_clock::now();
+    cout << "Searching for Student ID 102:" << endl;
+    cout << system.searchStudent(102) << endl;
+    end = chrono::high_resolution_clock::now();
+    duration = chrono::duration_cast<chrono::microseconds>(end - start);
+    cout << "Time taken to search for a student: " << duration.count() << " microseconds" << endl;
+
+    start = chrono::high_resolution_clock::now();
+    system.removeStudent(101);
+    end = chrono::high_resolution_clock::now();
+    duration = chrono::duration_cast<chrono::microseconds>(end - start);
+    cout << "Time taken to remove a student: " << duration.count() << " microseconds" << endl;
+
+    cout << "All Students after removal:" << endl;
     system.displayAllStudents();
 
     cout << "Average GPA: " << system.calculateAverageGPA() << endl;
 
-    system.removeStudent(101);
-
-    cout << system.searchStudent(102) << endl;
-
+    start = chrono::high_resolution_clock::now();
     system.updateGPA(102, 3.9);
-    cout << system.searchStudent(102) << endl;
+    end = chrono::high_resolution_clock::now();
+    duration = chrono::duration_cast<chrono::microseconds>(end - start);
+    cout << "Time taken to update a student's GPA: " << duration.count() << " microseconds" << endl;
+
+    cout << "All Students after updating GPA:" << endl;
+    system.displayAllStudents();
 
     return 0;
 }
+
